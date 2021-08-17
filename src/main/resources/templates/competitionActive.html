@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Journées Tarot</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Compétition Active du <span th:utext="${competition.competitionDate}"></span></h1>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> Joueur 1 </th>
+            <th> Joueur 2 </th>
+            <th> Joueur 3 </th>
+            <th> Joueur 4 </th>
+            <th> Joueur 5 </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:utext="${competition.joueur1.presentation()}">...</td>
+            <td th:utext="${competition.joueur2.presentation()}">...</td>
+            <td th:utext="${competition.joueur3.presentation()}">...</td>
+            <td th:utext="${competition.joueur4.presentation()}">...</td>
+            <div th:if="${competition.isCinqsJoueurs()}">
+                <td th:utext="${competition.joueur5.presentation()}">...</td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <a th:href="@{/}">
+            index
+        </a>
+    </p>
+    <p>
+        <a th:href="@{/competitions}">
+            historique
+        </a>
+    </p>
+</div>
+
+</body>
+
+</html>

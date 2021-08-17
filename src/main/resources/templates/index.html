@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Journées Tarot</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Welcome</h1>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> Date</th>
+            <th> Joueur 1</th>
+            <th> Joueur 2</th>
+            <th> Joueur 3</th>
+            <th> Joueur 4</th>
+            <th> Joueur 5</th>
+            <th> Active</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${competitions.empty}">
+            <td colspan="2"> Pas de compet</td>
+        </tr>
+        <tr th:each="competition : ${competitions}">
+            <td>
+                <a th:href="@{/competitions/{id}(id=${competition.id})}"
+                   th:utext="${competition.competitionDate}"
+                >
+                </a>
+            </td>
+            <td th:utext="${competition.joueur1.presentation()}">...</td>
+            <td th:utext="${competition.joueur2.presentation()}">...</td>
+            <td th:utext="${competition.joueur3.presentation()}">...</td>
+            <td th:utext="${competition.joueur4.presentation()}">...</td>
+            <div th:if="${competition.isCinqsJoueurs()}">
+                <td th:utext="${competition.joueur5.presentation()}">...</td>
+            </div>
+            <div th:if="${competition.isActive}">
+                <td>
+                    <a th:href="@{/active/{id}(id=${competition.id})}"
+                    > oui
+                    </a>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <a th:href="@{/competitions}">
+            historique
+        </a>
+    </p>
+</div>
+
+</body>
+
+</html>
